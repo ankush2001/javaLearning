@@ -51,5 +51,6 @@ public class StacksUsingArrays {
             System.out.print(this.data[i] + ", " );
         }
         System.out.println("End");
+
     }
 }

@@ -84,6 +84,7 @@ public class BinaryTree {
         int height = Math.max(lheight,rheight)+1;
         return height;
     }
+    ////SSSS
     public void preOrder(){
         this.preOrder(this.root);
     }
@@ -119,7 +120,10 @@ public class BinaryTree {
         System.out.print(node.data+", ");
         inorder(node.right);
     }
-    public void levelOrder(Node node){
+    public void levelOrder(){
+        this.levelOrder(this.root);
+    }
+    private void levelOrder(Node node){
         LinkedList<Node> queue = new LinkedList<>();
         queue.add(this.root);
         while (!queue.isEmpty()){
@@ -133,6 +137,42 @@ public class BinaryTree {
             }
         }
         System.out.println("End");
+    }
+    public boolean isBst(){
+        return this.isBst(this.root , Integer.MIN_VALUE , Integer.MAX_VALUE);
+    }
+    private boolean isBst(Node node  , int min , int max){
+        //base case
+        if(node == null){
+            return true;
+        }
+        // we are comparing every node 
+        if(node.data > max || node.data < min ){
+            return false;
+
+        }else if(!this.isBst(node.left ,min, node.data)){
+            return false;
+        }else if(!this.isBst(node.right,node.data,max)){
+            return false;
+        }
+        return true;
+    }
+    public int sumLeaf(){
+        return this.sumLeaf(this.root);
+    }
+
+    private int sumLeaf(Node node){
+        if (node == null){
+            return 0;
+        }
+        if(node.left == null && node.right == null){
+            return node.data;
+        }
+
+        int lSum = sumLeaf(node.left);
+        int rSum = sumLeaf(node.right);
+
+        return lSum+rSum;
     }
 
 }
